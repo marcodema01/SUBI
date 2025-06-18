@@ -1,0 +1,8 @@
+# Escludi file di ambiente (contiene le chiavi segrete)
+.env
+
+# Escludi la cartella delle dipendenze Node.js
+node_modules/
+
+# Escludi log temporanei
+*.log
