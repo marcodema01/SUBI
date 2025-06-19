@@ -14,7 +14,7 @@ const supabase = createClient(
 
 // Funzione di inizializzazione
 async function checkAndCreateRows() {
-  const ids = ["1", "2", "3"];
+  const ids = [1, 2, 3]; // <-- usa numeri!
   for (const id of ids) {
     const { data, error } = await supabase
       .from("SUBI")
@@ -24,7 +24,10 @@ async function checkAndCreateRows() {
 
     if (error && error.code !== "PGRST116") {
       // Errore diverso da "row not found"
-      console.error(`Errore durante il controllo della riga ${id}:`, error.message);
+      console.error(
+        `Errore durante il controllo della riga ${id}:`,
+        error.message
+      );
       continue;
     }
 
@@ -34,7 +37,10 @@ async function checkAndCreateRows() {
         .from("SUBI")
         .insert([{ id, value: false }]);
       if (insertError) {
-        console.error(`Errore durante l'inserimento della riga ${id}:`, insertError.message);
+        console.error(
+          `Errore durante l'inserimento della riga ${id}:`,
+          insertError.message
+        );
       } else {
         console.log(`Riga ${id} creata con value: false`);
       }
