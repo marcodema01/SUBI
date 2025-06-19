@@ -15,9 +15,12 @@
 //   });
 
 document.getElementById("btn1").addEventListener("click", () => {
-  aggiornaDato("1");
-  storia1();
-  console.log("Storia 1 avviata");
+  aggiornaDato("1", (nuovoValore) => {
+    if (nuovoValore === true) {
+      storia1();
+      console.log("Storia 1 avviata");
+    }
+  });
 });
 document.getElementById("btn2").addEventListener("click", () => {
   aggiornaDato("2");
@@ -43,6 +46,8 @@ function aggiornaDato(id) {
     .then((data) => {
       console.log("Dati ricevuti dal backend:", data);
       // ...gestisci i dati...
+      const record = data.find((el) => el.id === "1");
+      if (callback && record) callback(record.value);
     })
     .catch((err) => {
       console.error("Errore dal backend:", err);
