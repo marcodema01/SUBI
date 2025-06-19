@@ -40,6 +40,7 @@ audios.forEach((audio, index) => {
 });
 
 document.getElementById("btn1").addEventListener("click", () => {
+  console.log("Button 1 clicked");
   aggiornaDato(1, (nuovoValore) => {
     if (nuovoValore === true) {
       playAudio(1);
