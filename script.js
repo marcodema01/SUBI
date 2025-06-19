@@ -67,6 +67,7 @@ function aggiornaDato(id, callback) {
         if (record) {
           console.log("Record trovato:", record);
           callback(record.value);
+          console.log(`Valore aggiornato per id ${id}:`, record.value);
         } else {
           console.error(`Record con id ${id} non trovato`);
           console.log(
