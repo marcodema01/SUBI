@@ -49,32 +49,14 @@ function aggiornaDato(id, callback) {
   fetch("https://subi-ajng.onrender.com/update-character", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ id }), // id è un numero
+    body: JSON.stringify({ id }),
   })
     .then((res) => res.json())
-    .then((data) => {
-      console.log("Risposta update:", data);
-      return fetch("https://subi-ajng.onrender.com/characters");
-    })
-    .then((res) => res.json())
-    .then((data) => {
-      console.log("Dati ricevuti dal backend:", data);
-
+    .then((record) => {
+      console.log("Risposta update:", record);
       if (callback) {
-        // Cerca il record usando solo il confronto numerico
-        const record = data.find((el) => el.id === id);
-
-        if (record) {
-          console.log("Record trovato:", record);
-          callback(record.value);
-          console.log(`Valore aggiornato per id ${id}:`, record.value);
-        } else {
-          console.error(`Record con id ${id} non trovato`);
-          console.log(
-            "ID disponibili:",
-            data.map((el) => ({ id: el.id, tipo: typeof el.id }))
-          );
-        }
+        console.log(`Valore aggiornato per id ${id}:`, record.value);
+        callback(record.value);
       }
     })
     .catch((err) => {

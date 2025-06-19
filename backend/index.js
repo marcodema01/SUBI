@@ -98,7 +98,18 @@ app.post("/update-character", async (req, res) => {
     return res.status(500).json({ error: updateError.message });
   }
 
-  res.json({ success: true, id, nuovoValore });
+  const { data: datiAggiornati, error: selectError2 } = await supabase
+    .from("SUBI")
+    .select("id, value")
+    .eq("id", id)
+    .single();
+
+  if (selectError2) {
+    console.error("Errore select:", selectError2.message);
+    return res.status(500).json({ error: selectError2.message });
+  }
+
+  res.json(datiAggiornati);
 });
 
 const PORT = 3001;
