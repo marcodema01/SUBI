@@ -16,6 +16,15 @@
 
 const audioStoria1 = new Audio("audio/storia1.mp3");
 
+// Aggiungi gestione errori per l'audio
+audioStoria1.addEventListener("error", (e) => {
+  console.error("Errore caricamento audio:", e);
+});
+
+audioStoria1.addEventListener("canplaythrough", () => {
+  console.log("Audio caricato e pronto");
+});
+
 document.getElementById("btn1").addEventListener("click", () => {
   aggiornaDato("1", (nuovoValore) => {
     if (nuovoValore === true) {
@@ -27,15 +36,16 @@ document.getElementById("btn1").addEventListener("click", () => {
     }
   });
 });
+
 document.getElementById("btn2").addEventListener("click", () => {
   aggiornaDato("2");
 });
+
 document.getElementById("btn3").addEventListener("click", () => {
   aggiornaDato("3");
 });
 
 function aggiornaDato(id, callback) {
-  // fetch("http://localhost:3001/update-character", {
   fetch("https://subi-ajng.onrender.com/update-character", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -44,15 +54,21 @@ function aggiornaDato(id, callback) {
     .then((res) => res.json())
     .then((data) => {
       console.log("Risposta update:", data);
-      // return fetch("http://localhost:3001/characters");
       return fetch("https://subi-ajng.onrender.com/characters");
     })
     .then((res) => res.json())
     .then((data) => {
       console.log("Dati ricevuti dal backend:", data);
-      // ...gestisci i dati...
-      const record = data.find((el) => el.id === "1");
-      if (callback && record) callback(record.value);
+
+      // Controlla se il callback esiste prima di usarlo
+      if (callback) {
+        const record = data.find((el) => el.id === id); // Usa l'id passato, non hardcoded "1"
+        if (record) {
+          callback(record.value);
+        } else {
+          console.error(`Record con id ${id} non trovato`);
+        }
+      }
     })
     .catch((err) => {
       console.error("Errore dal backend:", err);
@@ -62,10 +78,22 @@ function aggiornaDato(id, callback) {
 function playStoria1() {
   audioStoria1.pause();
   audioStoria1.currentTime = 0;
-  audioStoria1.play();
+
+  // Gestisci la promessa di play()
+  audioStoria1
+    .play()
+    .then(() => {
+      console.log("Audio avviato con successo");
+    })
+    .catch((error) => {
+      console.error("Errore durante la riproduzione:", error);
+      // Se l'autoplay è bloccato, mostra un messaggio all'utente
+      alert("Clicca qui per avviare l'audio (richiesto dai browser moderni)");
+    });
 }
 
 function stopStoria1() {
   audioStoria1.pause();
-  audioStoria1.currentTime = 0; // Resetta l'audio all'inizio
+  audioStoria1.currentTime = 0;
+  console.log("Audio fermato");
 }
