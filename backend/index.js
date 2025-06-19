@@ -14,7 +14,7 @@ const supabase = createClient(
 
 // Funzione di inizializzazione
 async function checkAndCreateRows() {
-  const ids = [1, 2, 3]; // <-- usa numeri!
+  const ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; // <-- usa numeri!
   for (const id of ids) {
     const { data, error } = await supabase
       .from("SUBI")

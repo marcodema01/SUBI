@@ -7,19 +7,20 @@ body{
 }
 
 .button-group {
-    display: flex;
-    gap: 2rem;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2rem !important;
 }
 
 button {
     padding: 1rem 2rem !important;
-    font-size: 1.2rem;
-    border-radius: 8px;
-    border: none;
+    font-size: 1.2rem !important;
+    border-radius: 8px !important;
+    border: none !important;
     background: #000000 !important;
     color: rgb(255, 255, 255) !important;
-    cursor: pointer;
-    transition: background 0.2s;
+    cursor: pointer !important;
+    transition: background 0.2s !important;
 }
 
 button:hover {
