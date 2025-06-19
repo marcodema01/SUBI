@@ -4,7 +4,11 @@ const cors = require("cors");
 const { createClient } = require("@supabase/supabase-js");
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:5500', 'https://tuousername.github.io'],
+  methods: ['GET', 'POST'],
+  credentials: true
+}));
 app.use(express.json());
 
 const supabase = createClient(
