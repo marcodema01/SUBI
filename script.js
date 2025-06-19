@@ -15,7 +15,7 @@
 //   });
 
 const audios = [
-  new Audio("audio/1_wath-a-wonderful-day.mp3"),
+  new Audio("audio/1_what-a-wonderful-day.mp3"),
   new Audio("audio/2_thats-right.mp3"),
   new Audio("audio/3_milky-way.mp3"),
   new Audio("audio/4_galaxy.mp3"),
