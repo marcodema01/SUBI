@@ -14,11 +14,16 @@
 //     console.error("Errore dal backend:", err);
 //   });
 
+const audioStoria1 = new Audio("audio/storia1.mp3");
+
 document.getElementById("btn1").addEventListener("click", () => {
   aggiornaDato("1", (nuovoValore) => {
     if (nuovoValore === true) {
-      storia1();
+      playStoria1();
       console.log("Storia 1 avviata");
+    } else {
+      stopStoria1();
+      console.log("Storia 1 fermata");
     }
   });
 });
@@ -29,7 +34,7 @@ document.getElementById("btn3").addEventListener("click", () => {
   aggiornaDato("3");
 });
 
-function aggiornaDato(id) {
+function aggiornaDato(id, callback) {
   // fetch("http://localhost:3001/update-character", {
   fetch("https://subi-ajng.onrender.com/update-character", {
     method: "POST",
@@ -54,7 +59,13 @@ function aggiornaDato(id) {
     });
 }
 
-function storia1() {
-  const audio = new Audio("audio/storia1.mp3");
-  audio.play();
+function playStoria1() {
+  audioStoria1.pause();
+  audioStoria1.currentTime = 0;
+  audioStoria1.play();
+}
+
+function stopStoria1() {
+  audioStoria1.pause();
+  audioStoria1.currentTime = 0; // Resetta l'audio all'inizio
 }
