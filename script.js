@@ -14,6 +14,8 @@
 //     console.error("Errore dal backend:", err);
 //   });
 
+//ciao
+
 const audios = [
   new Audio("audio/1_what-a-wonderful-day.mp3"),
   new Audio("audio/2_thats-right.mp3"),
