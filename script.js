@@ -17,6 +17,7 @@
 document.getElementById("btn1").addEventListener("click", () => {
   aggiornaDato("1");
   storia1();
+  console.log("Storia 1 avviata");
 });
 document.getElementById("btn2").addEventListener("click", () => {
   aggiornaDato("2");
