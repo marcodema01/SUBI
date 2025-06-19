@@ -62,11 +62,26 @@ function aggiornaDato(id, callback) {
 
       // Controlla se il callback esiste prima di usarlo
       if (callback) {
-        const record = data.find((el) => el.id === id); // Usa l'id passato, non hardcoded "1"
+        // Debug: mostra tutti i record per capire la struttura
+        console.log("Tutti i record:", data);
+        console.log("Cerco id:", id, "tipo:", typeof id);
+
+        // Prova sia con string che con number
+        const record = data.find(
+          (el) =>
+            el.id == id || el.id === parseInt(id) || el.id === id.toString()
+        );
+
         if (record) {
+          console.log("Record trovato:", record);
           callback(record.value);
         } else {
           console.error(`Record con id ${id} non trovato`);
+          // Mostra gli id disponibili per debug
+          console.log(
+            "ID disponibili:",
+            data.map((el) => ({ id: el.id, tipo: typeof el.id }))
+          );
         }
       }
     })
