@@ -72,6 +72,7 @@ app.get("/characters", async (req, res) => {
 
 app.post("/update-character", async (req, res) => {
   const { id } = req.body;
+
   // Prendi il valore attuale
   const { data, error: selectError } = await supabase
     .from("SUBI")
@@ -90,7 +91,7 @@ app.post("/update-character", async (req, res) => {
   // Aggiorna il valore
   const { error: updateError } = await supabase
     .from("SUBI")
-    .update({ value: nuovoValore })
+    .update({ value: nuovoValore, updated_at: new Date() })
     .eq("id", id);
 
   if (updateError) {
@@ -100,7 +101,7 @@ app.post("/update-character", async (req, res) => {
 
   const { data: datiAggiornati, error: selectError2 } = await supabase
     .from("SUBI")
-    .select("id, value")
+    .select("id, value, updated_at")
     .eq("id", id)
     .single();
 
