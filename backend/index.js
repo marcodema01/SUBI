@@ -6,7 +6,10 @@ const { createClient } = require("@supabase/supabase-js");
 const app = express();
 app.use(
   cors({
-    origin: ["https://marcodema01.github.io/SUBI"],
+    origin: [
+      "https://marcodema01.github.io",
+      "https://marcodema01.github.io/SUBI",
+    ],
     methods: ["GET", "POST"],
     credentials: true,
   })
