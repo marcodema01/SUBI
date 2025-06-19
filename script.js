@@ -44,3 +44,8 @@ function aggiornaDato(id) {
       console.error("Errore dal backend:", err);
     });
 }
+
+function storia1() {
+  const audio = new Audio("audio/storia1.mp3");
+  audio.play();
+}
