@@ -24,7 +24,8 @@ const supabase = createClient(
 app.post("/all-false", async (req, res) => {
   const { error } = await supabase
     .from("SUBI")
-    .update({ value: false, updated_at: new Date() });
+    .update({ value: false, updated_at: new Date() })
+    .neq("id", null); // <-- questa riga permette di aggiornare tutte le righe
 
   if (error) {
     console.error("Errore update all-false:", error.message);
