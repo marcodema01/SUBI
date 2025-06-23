@@ -36,6 +36,18 @@ app.post("/all-false", async (req, res) => {
   res.json({ success: true });
 });
 
+app.post("/13-true", async (req, res) => {
+  const id = 13; // ID della riga da aggiornare
+  const { error } = await supabase
+    .from("SUBI")
+    .update({ value: true, updated_at: new Date() })
+    .eq("id", id);
+  if (error) {
+    console.error("Errore update 13-true:", error.message);
+    return res.status(500).json({ error: error.message });
+  }
+});
+
 // Funzione di inizializzazione
 async function checkAndCreateRows() {
   const ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; // <-- usa numeri!

@@ -16,6 +16,11 @@
 
 //ciao
 
+const supabase = supabase.createClient(
+  "https://igsuhgwbbxelfmebrqpw.supabase.co", // Sostituisci con il tuo URL
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlnc3VoZ3diYnhlbGZtZWJycXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTAyNDM4MTYsImV4cCI6MjA2NTgxOTgxNn0.ZHHhJSFn-5LXHii6Gjqo23lLOwCI0vD_Ewsa9c5WTQw" // Sostituisci con la tua chiave pubblica (anon key)
+);
+
 const audios = [
   new Audio("audio/1_what-a-wonderful-day.mp3"),
   new Audio("audio/2_thats-right.mp3"),
@@ -30,6 +35,25 @@ const audios = [
   new Audio("audio/11_morning1.mp3"),
   new Audio("audio/12_morning2.mp3"),
 ];
+
+const audioSpecial = new Audio("audio/charge-fx.mp3");
+
+supabase
+  .channel("realtime-subi")
+  .on(
+    "postgres_changes",
+    { event: "UPDATE", schema: "public", table: "SUBI", filter: "id=eq.13" },
+    (payload) => {
+      console.log("Aggiornamento ricevuto:", payload);
+      if (payload.new.value === true) {
+        audioSpecial.pause();
+        audioSpecial.currentTime = 0;
+        audioSpecial.play();
+        console.log("Audio speciale avviato!");
+      }
+    }
+  )
+  .subscribe();
 
 audios.forEach((audio, index) => {
   audio.addEventListener("error", (e) => {
@@ -190,6 +214,24 @@ document.getElementById("btnReset").addEventListener("click", () => {
   console.log("Button Reset clicked");
   setAllFalse();
 });
+
+document.getElementById("btnSpecial").addEventListener("click", () => {
+  console.log("Button Special clicked");
+  set13True();
+});
+
+function set13True() {
+  fetch("https://subi-ajng.onrender.com/13-true", {
+    method: "POST",
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("Dato 13 impostato a true:", data);
+    })
+    .catch((err) => {
+      console.error("Errore durante l'impostazione a true:", err);
+    });
+}
 
 function setAllFalse() {
   fetch("https://subi-ajng.onrender.com/all-false", {
