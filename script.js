@@ -16,7 +16,7 @@
 
 //ciao
 
-const supabase = supabase.createClient(
+const supabaseClient = supabase.createClient(
   "https://igsuhgwbbxelfmebrqpw.supabase.co", // Sostituisci con il tuo URL
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlnc3VoZ3diYnhlbGZtZWJycXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTAyNDM4MTYsImV4cCI6MjA2NTgxOTgxNn0.ZHHhJSFn-5LXHii6Gjqo23lLOwCI0vD_Ewsa9c5WTQw" // Sostituisci con la tua chiave pubblica (anon key)
 );
@@ -38,7 +38,7 @@ const audios = [
 
 const audioSpecial = new Audio("audio/charge-fx.mp3");
 
-supabase
+supabaseClient
   .channel("realtime-subi")
   .on(
     "postgres_changes",
