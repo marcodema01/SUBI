@@ -21,6 +21,19 @@ const supabase = createClient(
   process.env.SUPABASE_API_KEY
 );
 
+app.post("/all-false", async (req, res) => {
+  const { error } = await supabase
+    .from("SUBI")
+    .update({ value: false, updated_at: new Date() });
+
+  if (error) {
+    console.error("Errore update all-false:", error.message);
+    return res.status(500).json({ error: error.message });
+  }
+
+  res.json({ success: true });
+});
+
 // Funzione di inizializzazione
 async function checkAndCreateRows() {
   const ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; // <-- usa numeri!

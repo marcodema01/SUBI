@@ -160,6 +160,19 @@ document.getElementById("btn10").addEventListener("click", () => {
   });
 });
 
+function setAllFalse() {
+  fetch("https://subi-ajng.onrender.com/all-false", {
+    method: "POST",
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("Tutti i dati impostati a false:", data);
+    })
+    .catch((err) => {
+      console.error("Errore durante l'impostazione a false:", err);
+    });
+}
+
 function aggiornaDato(id, callback) {
   fetch("https://subi-ajng.onrender.com/update-character", {
     method: "POST",
