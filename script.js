@@ -160,6 +160,11 @@ document.getElementById("btn10").addEventListener("click", () => {
   });
 });
 
+document.getElementById("btnReset").addEventListener("click", () => {
+  console.log("Button Reset clicked");
+  setAllFalse();
+});
+
 function setAllFalse() {
   fetch("https://subi-ajng.onrender.com/all-false", {
     method: "POST",
