@@ -22,7 +22,7 @@ const supabase = createClient(
 );
 
 app.post("/all-false", async (req, res) => {
-  const ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; // <-- usa numeri!
+  const ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; // <-- usa numeri!
   const { error } = await supabase
     .from("SUBI")
     .update({ value: false, updated_at: new Date() })
@@ -38,7 +38,7 @@ app.post("/all-false", async (req, res) => {
 
 // Funzione di inizializzazione
 async function checkAndCreateRows() {
-  const ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; // <-- usa numeri!
+  const ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; // <-- usa numeri!
   for (const id of ids) {
     const { data, error } = await supabase
       .from("SUBI")

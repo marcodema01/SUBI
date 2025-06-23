@@ -27,6 +27,8 @@ const audios = [
   new Audio("audio/8_comet.mp3"),
   new Audio("audio/9_fox.mp3"),
   new Audio("audio/10_eyes-again.mp3"),
+  new Audio("audio/11_morning1.mp3"),
+  new Audio("audio/12_morning2.mp3"),
 ];
 
 audios.forEach((audio, index) => {
@@ -156,6 +158,30 @@ document.getElementById("btn10").addEventListener("click", () => {
     } else {
       stopAudio(10);
       console.log("Storia 10 fermata");
+    }
+  });
+});
+
+document.getElementById("btn11").addEventListener("click", () => {
+  aggiornaDato(11, (nuovoValore) => {
+    if (nuovoValore === true) {
+      playAudio(11);
+      console.log("Storia 11 avviata");
+    } else {
+      stopAudio(11);
+      console.log("Storia 11 fermata");
+    }
+  });
+});
+
+document.getElementById("btn12").addEventListener("click", () => {
+  aggiornaDato(12, (nuovoValore) => {
+    if (nuovoValore === true) {
+      playAudio(12);
+      console.log("Storia 12 avviata");
+    } else {
+      stopAudio(12);
+      console.log("Storia 12 fermata");
     }
   });
 });
