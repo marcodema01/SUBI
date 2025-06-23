@@ -36,7 +36,7 @@ const audios = [
   new Audio("audio/12_morning2.mp3"),
 ];
 
-const audioSpecial = new Audio("audio/charge-fx.mp3");
+const audioSpecial = new Audio("audio/13_charge-fx.mp3");
 
 supabaseClient
   .channel("realtime-subi")
