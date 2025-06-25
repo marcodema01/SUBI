@@ -218,6 +218,10 @@ document.getElementById("btnReset").addEventListener("click", () => {
 document.getElementById("btnSpecial").addEventListener("click", () => {
   console.log("Button Special clicked");
   set13True();
+  audioSpecial.pause();
+  audioSpecial.currentTime = 0;
+  audioSpecial.play();
+  console.log("Audio speciale avviato");
 });
 
 document.getElementById("btnBlack").addEventListener("click", () => {
