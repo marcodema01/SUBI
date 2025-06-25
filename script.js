@@ -220,6 +220,15 @@ document.getElementById("btnSpecial").addEventListener("click", () => {
   set13True();
 });
 
+document.getElementById("btnBlack").addEventListener("click", () => {
+  console.log("Button Black clicked");
+  aggiornaDato(14, (nuovoValore) => {
+    if (nuovoValore === true) {
+      console.log("Lo schermo diventa nero!");
+    }
+  });
+});
+
 function set13True() {
   fetch("https://subi-ajng.onrender.com/13-true", {
     method: "POST",
